@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Notas</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #999; padding: 10px; text-align: left; }
+        th { background-color: #1f4e78; color: white; }
+        .aprobado { color: green; font-weight: bold; }
+        .reprobado { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Notas por Estudiante</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Materia</th>
+                <th>Promedio</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in datos %}
+            <tr>
+                <td>{{ item.estudiante.nombre }} {{ item.estudiante.apellido }}</td>
+                <td>{{ item.materia.nombre }}</td>
+                <td>{{ item.promedio }}</td>
+                <td>
+                    {% if item.aprobado %}
+                        <span class="aprobado">APROBADO</span>
+                    {% else %}
+                        <span class="reprobado">REPROBADO</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No hay datos.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
